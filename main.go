@@ -5,7 +5,9 @@ import (
 	"log"
 	"os"
 
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/leovilani/api-go/src/controller/routes"
 )
 
 func main() {
@@ -15,4 +17,12 @@ func main() {
 	}
 
 	fmt.Println(os.Getenv("TESTE"))
+
+	router := gin.Default()
+
+	routes.InitRoutes(&router.RouterGroup)
+
+	if err := router.Run(":8080"); err != nil {
+		log.Fatal(err)
+	}
 }
